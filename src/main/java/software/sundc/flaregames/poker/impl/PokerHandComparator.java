@@ -3,6 +3,7 @@ package software.sundc.flaregames.poker.impl;
 import java.util.Comparator;
 
 import software.sundc.flaregames.poker.model.PokerHand;
+import software.sundc.flaregames.poker.model.Rank;
 
 public class PokerHandComparator implements Comparator<PokerHand> {
 
@@ -23,8 +24,21 @@ public class PokerHandComparator implements Comparator<PokerHand> {
 	 */
 	@Override
 	public int compare(PokerHand firstHand, PokerHand secondHand) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		RankCalculator rankCalculator = new RankCalculator();
+	
+		Rank rankOfFirstHand = rankCalculator.calculateRank(firstHand);
+		Rank rankOfSecondHand = rankCalculator.calculateRank(secondHand);
+		
+		int basicCompareResult = rankOfFirstHand.compareTo(rankOfSecondHand);
+		
+		if(basicCompareResult != 0){
+
+			return 0;
+		}else{
+			return basicCompareResult;
+		}
+		
 	}
 
 }
