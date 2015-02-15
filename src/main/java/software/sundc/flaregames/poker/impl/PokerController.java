@@ -36,13 +36,13 @@ public class PokerController implements PokerDealer {
 
 	@Override
 	@RequestMapping("/dealOutCardsRandomly")
-	public @ResponseBody Set<PokerHand> dealOutCardsRandomly(Integer numberOfPlayer) {
+	public @ResponseBody Set<PokerHand> dealOutCardsRandomly(@RequestBody Integer numberOfPlayer) {
 		return pokerDealer.dealOutCardsRandomly(numberOfPlayer);
 	}
 
 	@Override
 	@RequestMapping("/dealOutCardsManually")
-	public Set<PokerHand> dealOutCardsManually(Map<String, Set<Card>> pokerHands) throws InvalidCardSetException {
+	public Set<PokerHand> dealOutCardsManually(@RequestBody Map<String, Set<Card>> pokerHands) throws InvalidCardSetException {
 		return pokerDealer.dealOutCardsManually(pokerHands);
 	}
 
