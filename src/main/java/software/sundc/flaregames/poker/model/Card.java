@@ -1,7 +1,8 @@
 package software.sundc.flaregames.poker.model;
 
-import software.sundc.flaregames.poker.model.exception.UnknownValueException;
+import java.util.UUID;
 
+import software.sundc.flaregames.poker.model.exception.UnknownValueException;
 
 /**
  * Poker card. A poker card has a value and suit.
@@ -9,14 +10,23 @@ import software.sundc.flaregames.poker.model.exception.UnknownValueException;
  * @author selim
  * 
  */
-public class Card implements Comparable<Card>{
+public class Card implements Comparable<Card> {
 	private Value value;
 	private Suit suit;
 
+	// Private constructor is used only for json deserialization
+	@SuppressWarnings("unused")
+	private Card() {
+	}
+
 	/**
-	 * Create a card by suit sign and value denotion. Both parameters should be single char String object which represent card value and suit.
-	 * @param suitSign Single character suit sign.
-	 * @param denotion Single character value denotion.
+	 * Create a card by suit sign and value denotion. Both parameters should be
+	 * single char String object which represent card value and suit.
+	 * 
+	 * @param suitSign
+	 *            Single character suit sign.
+	 * @param denotion
+	 *            Single character value denotion.
 	 */
 	public Card(String suitSign, String denotion) {
 		this.suit = Suit.getValueOf(suitSign);
@@ -24,28 +34,28 @@ public class Card implements Comparable<Card>{
 	}
 
 	/**
-	 * Create a card by suit and value enumerations. 
-	 * @param suit	Suit enumeration.
-	 * @param value Value enumeration.
+	 * Create a card by suit and value enumerations.
+	 * 
+	 * @param suit
+	 *            Suit enumeration.
+	 * @param value
+	 *            Value enumeration.
 	 */
-	public Card(Suit suit, Value value){
-		if(suit == null || value == null) {
+	public Card(Suit suit, Value value) {
+		if (suit == null || value == null) {
 			throw new UnknownValueException("Null value is unknown. The card cannot be created");
 		}
 		this.suit = suit;
 		this.value = value;
 	}
 
-	
 	public Value getValue() {
 		return value;
 	}
 
-
 	public Suit getSuit() {
 		return suit;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -74,20 +84,15 @@ public class Card implements Comparable<Card>{
 
 	@Override
 	public String toString() {
-		return suit.toSign() + value.toNumericValue();
+		return suit.toSign() + value.toDenotion();
 	}
-
 
 	@Override
 	public int compareTo(Card otherCard) {
 		Value thisValue = this.getValue();
 		Value otherValue = otherCard.getValue();
-		if(thisValue.equals(otherValue)){
+		if (thisValue.equals(otherValue)) {
 			return 0;
-		} else if (thisValue == null && otherValue != null) {
-			return -1;
-		} else if (thisValue != null && otherValue == null) {
-			return 1;
 		} else {
 			return thisValue.toNumericValue().compareTo(otherValue.toNumericValue());
 		}

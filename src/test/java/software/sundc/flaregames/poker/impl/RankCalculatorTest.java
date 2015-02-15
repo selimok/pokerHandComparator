@@ -1,16 +1,11 @@
 package software.sundc.flaregames.poker.impl;
 
-import java.util.Set;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import software.sundc.flaregames.poker.model.Card;
 import software.sundc.flaregames.poker.model.PokerHand;
 import software.sundc.flaregames.poker.model.Rank;
 import software.sundc.flaregames.poker.test.util.PokerTestUtil;
-
-import com.google.common.collect.Sets;
 
 public class RankCalculatorTest {
 
@@ -19,15 +14,8 @@ public class RankCalculatorTest {
 	@Test
 	public void shouldRankAsStraightFlush() {
 
-		// Given
-		Card cA = new Card("C", "A");
-		Card cK = new Card("C", "K");
-		Card cQ = new Card("C", "Q");
-		Card cJ = new Card("C", "J");
-		Card c10 = new Card("C", "10");
-		Set<Card> cards = PokerTestUtil.createCardSet(c10,cK,cA,cJ,cQ);
-		
-		PokerHand pokerHand = new PokerHand(cards);
+		// Given		
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CA","CK","CQ","CJ","C10");
 		
 		// When
 		Rank rank = rankCalculator.calculateRank(pokerHand);
@@ -41,14 +29,7 @@ public class RankCalculatorTest {
 	public void shouldNotRankAsStraightFlush() {
 
 		// Given
-		Card cA = new Card("C", "A");
-		Card cK = new Card("C", "K");
-		Card cQ = new Card("C", "Q");
-		Card cJ = new Card("C", "J");
-		Card c9 = new Card("C", "9");
-		Set<Card> cards = PokerTestUtil.createCardSet(c9,cK,cA,cJ,cQ);
-		
-		PokerHand pokerHand = new PokerHand(cards);
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CA","CK","CQ","CJ","C9");
 		
 		// When
 		Rank rank = rankCalculator.calculateRank(pokerHand);
@@ -62,14 +43,7 @@ public class RankCalculatorTest {
 	public void shouldRankAsFourOfAKind() {
 
 		// Given
-		Card c5 = new Card("C", "5");
-		Card h5 = new Card("H", "5");
-		Card d5 = new Card("D", "5");
-		Card s5 = new Card("S", "5");
-		Card c10 = new Card("C", "10");
-		Set<Card> cards = PokerTestUtil.createCardSet(c5,h5,d5,c10,s5);
-		
-		PokerHand pokerHand = new PokerHand(cards);
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("C5","H5","D5","S5","C10");
 		
 		// When
 		Rank rank = rankCalculator.calculateRank(pokerHand);
@@ -82,14 +56,7 @@ public class RankCalculatorTest {
 	public void shouldNotRankAsFourOfAKind() {
 
 		// Given
-		Card c5 = new Card("C", "5");
-		Card h6 = new Card("H", "6");
-		Card d5 = new Card("D", "5");
-		Card s5 = new Card("S", "5");
-		Card c10 = new Card("C", "10");
-		Set<Card> cards = PokerTestUtil.createCardSet(c5,h6,d5,c10,s5);
-		
-		PokerHand pokerHand = new PokerHand(cards);
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("C5","H6","D5","S5","C10");
 		
 		// When
 		Rank rank = rankCalculator.calculateRank(pokerHand);
@@ -103,14 +70,7 @@ public class RankCalculatorTest {
 	public void shouldRankAsFullHouse() {
 
 		// Given
-		Card c5 = new Card("C", "5");
-		Card h5 = new Card("H", "5");
-		Card d5 = new Card("D", "5");
-		Card s10 = new Card("S", "10");
-		Card c10 = new Card("C", "10");
-		Set<Card> cards = PokerTestUtil.createCardSet(c5,h5,d5,c10,s10);
-		
-		PokerHand pokerHand = new PokerHand(cards);
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("C5","H5","D5","S10","C10");
 		
 		// When
 		Rank rank = rankCalculator.calculateRank(pokerHand);
@@ -123,14 +83,7 @@ public class RankCalculatorTest {
 	public void shouldNotRankAsFullHouse() {
 
 		// Given
-		Card c5 = new Card("C", "5");
-		Card h5 = new Card("H", "5");
-		Card d6 = new Card("D", "6");
-		Card s10 = new Card("S", "10");
-		Card c10 = new Card("C", "10");
-		Set<Card> cards = PokerTestUtil.createCardSet(c5,h5,d6,c10,s10);
-		
-		PokerHand pokerHand = new PokerHand(cards);
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("C5","H5","D6","S10","C10");
 		
 		// When
 		Rank rank = rankCalculator.calculateRank(pokerHand);
@@ -144,18 +97,10 @@ public class RankCalculatorTest {
 	public void shouldRankAsFlush() {
 
 		// Given
-		Card cA = new Card("C", "A");
-		Card c3 = new Card("C", "3");
-		Card cQ = new Card("C", "Q");
-		Card c5 = new Card("C", "5");
-		Card c10 = new Card("C", "10");
-		Set<Card> cards = PokerTestUtil.createCardSet(c10,c3,cA,c5,cQ);
-		
-		PokerHand pokerHand = new PokerHand(cards);
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CA","C3","CQ","C5","C10");
 		
 		// When
 		Rank rank = rankCalculator.calculateRank(pokerHand);
-		
 		
 		// Then
 		Assert.assertEquals(Rank.FLUSH, rank);
@@ -165,18 +110,9 @@ public class RankCalculatorTest {
 	public void shouldNotRankAsFlush() {
 
 		// Given
-		Card cA = new Card("C", "A");
-		Card cK = new Card("S", "K");
-		Card cQ = new Card("C", "Q");
-		Card cJ = new Card("C", "J");
-		Card c10 = new Card("C", "10");
-		Set<Card> cards = PokerTestUtil.createCardSet(c10,cK,cA,cJ,cQ);
-		
-		PokerHand pokerHand = new PokerHand(cards);
-		
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CA","SK","CQ","CJ","C10");		
 		// When
 		Rank rank = rankCalculator.calculateRank(pokerHand);
-		
 		
 		// Then
 		Assert.assertNotEquals(Rank.FLUSH, rank);
@@ -186,18 +122,10 @@ public class RankCalculatorTest {
 	public void shouldNotRankStraightFlushAsFlush() {
 
 		// Given
-		Card cA = new Card("C", "A");
-		Card cK = new Card("C", "K");
-		Card cQ = new Card("C", "Q");
-		Card cJ = new Card("C", "J");
-		Card c10 = new Card("C", "10");
-		Set<Card> cards = PokerTestUtil.createCardSet(c10,cK,cA,cJ,cQ);
-		
-		PokerHand pokerHand = new PokerHand(cards);
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CA","CK","CQ","CJ","C10");
 		
 		// When
 		Rank rank = rankCalculator.calculateRank(pokerHand);
-		
 		
 		// Then
 		Assert.assertNotEquals(Rank.FLUSH, rank);
@@ -207,18 +135,10 @@ public class RankCalculatorTest {
 	public void shouldRankAsStraight() {
 
 		// Given
-		Card cJ = new Card("C", "J");
-		Card s9 = new Card("S", "9");
-		Card hQ = new Card("H", "Q");
-		Card d8 = new Card("D", "8");
-		Card c10 = new Card("C", "10");
-		Set<Card> cards = PokerTestUtil.createCardSet(c10,s9,cJ,d8,hQ);
-		
-		PokerHand pokerHand = new PokerHand(cards);
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CJ","S9","HQ","D8","C10");
 		
 		// When
 		Rank rank = rankCalculator.calculateRank(pokerHand);
-		
 		
 		// Then
 		Assert.assertEquals(Rank.STRAIGHT, rank);
@@ -228,18 +148,10 @@ public class RankCalculatorTest {
 	public void shouldNotRankAsStraight() {
 
 		// Given
-		Card cA = new Card("C", "A");
-		Card sK = new Card("S", "K");
-		Card c5 = new Card("C", "5");
-		Card cJ = new Card("C", "J");
-		Card c10 = new Card("C", "10");
-		Set<Card> cards = PokerTestUtil.createCardSet(c10,c5,cA,cJ,sK);
-		
-		PokerHand pokerHand = new PokerHand(cards);
-		
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CA","SK","C5","CJ","C10");		
+
 		// When
 		Rank rank = rankCalculator.calculateRank(pokerHand);
-		
 		
 		// Then
 		Assert.assertNotEquals(Rank.STRAIGHT, rank);
@@ -249,21 +161,114 @@ public class RankCalculatorTest {
 	public void shouldNotRankStraightFlushAsStraight() {
 
 		// Given
-		Card cA = new Card("C", "A");
-		Card cK = new Card("C", "K");
-		Card cQ = new Card("C", "Q");
-		Card cJ = new Card("C", "J");
-		Card c10 = new Card("C", "10");
-		Set<Card> cards = PokerTestUtil.createCardSet(c10,cK,cA,cJ,cQ);
-		
-		PokerHand pokerHand = new PokerHand(cards);
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CA","CK","CQ","CJ","C10");
 		
 		// When
 		Rank rank = rankCalculator.calculateRank(pokerHand);
 		
-		
 		// Then
 		Assert.assertNotEquals(Rank.STRAIGHT, rank);
 	}
+	
+	@Test
+	public void shouldRankAsThreeOfAKind() {
+
+		// Given
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CJ","SJ","HJ","D8","C10");
+
+		// When
+		Rank rank = rankCalculator.calculateRank(pokerHand);
+		
+		// Then
+		Assert.assertEquals(Rank.THREE_OF_A_KIND, rank);
+	}
+	
+	@Test
+	public void shouldNotRankAsThreeOfAKind() {
+		// Given
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CA","SK","C5","CJ","C10");
+		
+		// When
+		Rank rank = rankCalculator.calculateRank(pokerHand);
+		
+		// Then
+		Assert.assertNotEquals(Rank.THREE_OF_A_KIND, rank);
+	}
+	
+	@Test
+	public void shouldRankAsTwoPair() {
+
+		// Given
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CJ","SJ","HJ","D8","C10");
+
+		// When
+		Rank rank = rankCalculator.calculateRank(pokerHand);
+		
+		// Then
+		Assert.assertEquals(Rank.THREE_OF_A_KIND, rank);
+	}
+	
+	@Test
+	public void shouldNotRankAsTwoPairs() {
+
+		// Given
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CA","SJ","C5","S6","C10");
+		
+		// When
+		Rank rank = rankCalculator.calculateRank(pokerHand);
+		
+		// Then
+		Assert.assertNotEquals(Rank.TWO_PAIRS, rank);
+	}	
+	
+	@Test
+	public void shouldRankPair() {
+
+		// Given
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CJ","SJ","H6","D8","C10");
+		
+		// When
+		Rank rank = rankCalculator.calculateRank(pokerHand);
+		
+		// Then
+		Assert.assertEquals(Rank.PAIR, rank);
+	}
+	
+	@Test
+	public void shouldNotRankAsPair() {
+		// Given
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CK","SJ","C5","S6","C10");
+		
+		// When
+		Rank rank = rankCalculator.calculateRank(pokerHand);
+		
+		// Then
+		Assert.assertNotEquals(Rank.PAIR, rank);
+	}	
+	
+	@Test
+	public void shouldRankAsHighCard() {
+
+		// Given
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CJ","SK","H6","D8","C10");
+		
+		// When
+		Rank rank = rankCalculator.calculateRank(pokerHand);
+		
+		// Then
+		Assert.assertEquals(Rank.HIGH_CARD, rank);
+	}
+
+	@Test
+	public void shouldNotRankAsHighCard() {
+		// Given
+		PokerHand pokerHand = PokerTestUtil.createPokerHand("CK","SK","C5","S6","C10");
+		
+		// When
+		Rank rank = rankCalculator.calculateRank(pokerHand);
+		
+		// Then
+		Assert.assertNotEquals(Rank.HIGH_CARD, rank);
+	}	
 	
 }

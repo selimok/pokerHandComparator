@@ -16,6 +16,12 @@ public class PokerHand {
 	private String handId;
 	private Set<Card> cards;
 
+	// Private constructor is used only for json deserialization
+	@SuppressWarnings("unused")
+	private PokerHand(){
+		handId = UUID.randomUUID().toString();
+	}
+	
 	/**
 	 * Create a poker hand with five cards and given hand Id.
 	 * 
