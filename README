@@ -1,0 +1,22 @@
+About
+-----
+This is a demo web app which compares poker hands with each other and rank them to detect the winner hand.
+
+
+How to run
+----------
+1. Build project with maven (e.g. mvn clean package)
+
+2. Execute jar file under target folder.
+   java -jar target/*.jar
+
+   If you have a port conflict add --server.port=<desired_port> parameter on above command.
+
+
+How to use
+----------
+1. Open a browser and visit http://localhost:8080/index.html
+2. Add at least two poker hands by clicking '+ Add Poker Hand' button.
+3. Pick up cards for each hand. Be sure every card is used only once.
+4. Finally click to 'Compare Poker Hands' button to see results.
+
