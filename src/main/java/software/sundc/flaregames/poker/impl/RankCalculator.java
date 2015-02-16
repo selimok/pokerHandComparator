@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
 import software.sundc.flaregames.poker.model.Card;
 import software.sundc.flaregames.poker.model.PokerHand;
 import software.sundc.flaregames.poker.model.Rank;
@@ -12,6 +14,7 @@ import software.sundc.flaregames.poker.util.CardUtils;
 
 import com.google.common.collect.Lists;
 
+@Component
 public class RankCalculator {
 
 	public Rank calculateRank(PokerHand pokerHand) {

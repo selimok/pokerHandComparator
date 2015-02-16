@@ -1,26 +1,22 @@
 package software.sundc.flaregames.poker.impl;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.common.collect.Sets;
+import org.springframework.web.bind.annotation.RestController;
 
 import software.sundc.flaregames.poker.api.PokerDealer;
-import software.sundc.flaregames.poker.model.Card;
 import software.sundc.flaregames.poker.model.PokerHand;
-import software.sundc.flaregames.poker.model.Suit;
-import software.sundc.flaregames.poker.model.Value;
+import software.sundc.flaregames.poker.model.RankResult;
 import software.sundc.flaregames.poker.model.exception.InvalidCardSetException;
 
-@Controller
+@RestController
 @RequestMapping("/poker")
 public class PokerController implements PokerDealer {
 
@@ -30,7 +26,7 @@ public class PokerController implements PokerDealer {
 	
 	@Override
 	@RequestMapping(value = "/rankPokerHands")
-	public @ResponseBody Map<PokerHand, Integer> rankPokerHands(@RequestBody Set<PokerHand> pokerHands) {
+	public @ResponseBody List<RankResult> rankPokerHands(@RequestBody Set<PokerHand> pokerHands) throws InvalidCardSetException {
 		return pokerDealer.rankPokerHands(pokerHands);
 	}
 
@@ -39,11 +35,4 @@ public class PokerController implements PokerDealer {
 	public @ResponseBody Set<PokerHand> dealOutCardsRandomly(@RequestBody Integer numberOfPlayer) {
 		return pokerDealer.dealOutCardsRandomly(numberOfPlayer);
 	}
-
-	@Override
-	@RequestMapping("/dealOutCardsManually")
-	public Set<PokerHand> dealOutCardsManually(@RequestBody Map<String, Set<Card>> pokerHands) throws InvalidCardSetException {
-		return pokerDealer.dealOutCardsManually(pokerHands);
-	}
-
 }
