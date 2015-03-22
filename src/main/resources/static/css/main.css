@@ -401,7 +401,8 @@ nav a:hover {
 }
 
 .poker-hand {
-	padding-top : 10px;
+	clear:both;
+	padding-top: 50px;
 }
 
 .handId {
@@ -412,4 +413,28 @@ nav a:hover {
 .rank {
 	color: #7FFF66;
 	font-weight: bold;
+}
+
+.poker-card {
+	float: left;
+	margin-left: -30px;
+}
+
+.poker-card img {
+	width: 100px;
+}
+
+.poker-hand-winner{
+	padding-left: 40px;
+	color: #ffa600;
+	font-weight:bold;
+	font-size: 60px;
+	line-height: 1.5em;
+}
+
+.poker-hand-rank{
+	padding-left: 40px;
+	color: #ffffff;
+	font-weight:normal;
+	font-size: 16px;
 }
